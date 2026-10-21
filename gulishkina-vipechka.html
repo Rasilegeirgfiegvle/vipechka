@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Гулишкина выпечка — домашние орешки и торты</title>
+<link href="https://fonts.googleapis.com/css2?family=Marck+Script&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf2f0;--surface:#fff;--ink:#3a2420;--muted:#7b615c;--berry:#b2395f;--on-berry:#fff;--blush:#f1d3cd;--line:#ecd5d0;--honey:#e7b663;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#241615;--surface:#321f1d;--ink:#f6e6e2;--muted:#c4a8a2;--berry:#e0748f;--on-berry:#2a1210;--blush:#4a2c2a;--line:#4d3330}}
+:root[data-theme="dark"]{--bg:#241615;--surface:#321f1d;--ink:#f6e6e2;--muted:#c4a8a2;--berry:#e0748f;--on-berry:#2a1210;--blush:#4a2c2a;--line:#4d3330}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.55 Nunito,system-ui,sans-serif;padding-bottom:96px}
+.wrap{max-width:720px;margin:0 auto;padding:0 20px}
+.hero{padding:44px 0 28px;text-align:left}
+.logo{font:400 clamp(52px,16vw,88px)/.95 "Marck Script",cursive;color:var(--berry);margin:0}
+.hero p{max-width:34ch;margin:14px 0 22px;color:var(--muted);font-size:19px}
+.btn{display:inline-block;border:0;border-radius:999px;background:var(--berry);color:var(--on-berry);font:800 16px Nunito,sans-serif;padding:13px 24px;cursor:pointer;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--berry);box-shadow:inset 0 0 0 2px var(--berry);margin-left:8px}
+.btn:focus-visible,.chip:focus-visible,.q button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--honey);outline-offset:2px}
+.facts{display:flex;gap:10px;flex-wrap:wrap;margin:0;padding:0;list-style:none}
+.facts li{background:var(--blush);border-radius:999px;padding:6px 14px;font-weight:600;font-size:15px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:18px 0 6px;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:5}
+.chip{flex:none;border:2px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:8px 18px;font:600 16px Nunito,sans-serif;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--berry);border-color:var(--berry);color:var(--on-berry)}
+.item{display:grid;grid-template-columns:84px 1fr auto;gap:14px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line)}
+.pic{width:84px;height:84px;border-radius:42% 58% 50% 50%/55% 45% 55% 45%;display:grid;place-items:center;font-size:38px;background:radial-gradient(circle at 35% 30%,#f6d79a,#cf8f4a)}
+.pic.cake{background:radial-gradient(circle at 35% 30%,#f9d3dc,#d4668a)}
+.pic.pie{background:radial-gradient(circle at 35% 30%,#f3d08f,#c27a36)}
+.item h3{margin:0;font-size:18px;font-weight:800}
+.item small{display:block;color:var(--muted);font-size:14px;line-height:1.35;margin-top:2px}
+.price{font-weight:800;margin-top:4px;color:var(--berry)}
+.q{display:flex;align-items:center;gap:8px}
+.q button{width:38px;height:38px;border-radius:50%;border:2px solid var(--berry);background:transparent;color:var(--berry);font:800 20px/1 Nunito,sans-serif;cursor:pointer}
+.q button.add{width:auto;padding:0 16px;border-radius:999px;font-size:15px}
+.q b{min-width:18px;text-align:center}
+h2{font:400 34px/1.1 "Marck Script",cursive;color:var(--berry);margin:36px 0 8px}
+.info{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px 20px;margin:10px 0}
+.info p{margin:4px 0}
+.note{color:var(--muted);font-size:14px;margin-top:28px}
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);padding:12px 20px calc(12px + env(safe-area-inset-bottom,0px));transform:translateY(110%);transition:transform .25s}
+.bar.on{transform:none}
+.bar div{max-width:720px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.bar span{font-weight:800}
+.order{display:none;margin-top:12px}
+.order.on{display:block}
+input,textarea{width:100%;border:2px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);font:400 16px Nunito,sans-serif;padding:11px 14px;margin:6px 0}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.bar{transition:none}}
+</style>
+</head>
+<body>
+<header class="wrap hero">
+  <h1 class="logo">Гулишкина<br>выпечка</h1>
+  <p>Домашние орешки со сгущёнкой, торты и пирожки. Печём по заказу.</p>
+  <a class="btn" href="#menu">Выбрать выпечку</a><a class="btn ghost" href="#delivery">Доставка</a>
+  <ul class="facts" style="margin-top:22px"><li>Домашний рецепт</li><li>Свежая выпечка по заказу</li><li>Доставка</li></ul>
+</header>
+
+<main class="wrap" id="menu">
+  <nav class="chips" id="chips" aria-label="Разделы меню"></nav>
+  <div id="list"></div>
+
+  <section id="order" class="order">
+    <h2>Оформить заказ</h2>
+    <label>Ваше имя<input id="name" autocomplete="name"></label>
+    <label>Адрес доставки или «самовывоз»<input id="addr" autocomplete="street-address"></label>
+    <label>Когда нужно<input id="when" placeholder="Например, завтра к 15:00"></label>
+    <label>Комментарий<textarea id="cmt" rows="2"></textarea></label>
+  </section>
+
+  <section id="delivery">
+    <h2>Доставка</h2>
+    <div class="info"><p><b>Как заказать:</b> выберите позиции, нажмите «Заказать в WhatsApp» — сообщение с заказом откроется готовым.</p><p>Условия и стоимость доставки уточняются при подтверждении заказа.</p></div>
+  </section>
+  <p class="note">Демо-версия. Названия, цены и состав — примеры, их заменят на настоящие.</p>
+</main>
+
+<div class="bar" id="bar"><div><span id="sum"></span><button class="btn" id="go">Заказать в WhatsApp</button></div></div>
+
+<script>
+// Номер WhatsApp в формате 79XXXXXXXXX (без + и пробелов). Пока пусто — заказ копируется.
+var WA = "";
+var CUR = "₽";
+var items = [
+ {id:1,cat:"Орешки",name:"Орешки со сгущёнкой",desc:"Хрустящие половинки, варёная сгущёнка. 500 г",price:450,ic:"🌰"},
+ {id:2,cat:"Орешки",name:"Орешки с орехами",desc:"С грецким орехом в начинке. 500 г",price:520,ic:"🌰"},
+ {id:3,cat:"Орешки",name:"Большой набор орешков",desc:"Подарочная коробка. 1 кг",price:850,ic:"🎁"},
+ {id:4,cat:"Торты",name:"Медовик",desc:"Мягкие коржи, сметанный крем. 1 кг",price:1300,ic:"🍰",t:"cake"},
+ {id:5,cat:"Торты",name:"Торт на заказ",desc:"Вкус и оформление обсуждаем в WhatsApp. От 1,5 кг",price:1800,ic:"🎂",t:"cake"},
+ {id:6,cat:"Пахлава",name:"Пахлава с грецким орехом",desc:"Ромбики с мёдом. 500 г",price:700,ic:"🍯"},
+ {id:7,cat:"Пирожки",name:"Жареные пирожки",desc:"Пышные, с начинкой на выбор. 6 шт.",price:320,ic:"🥟",t:"pie"}
+];
+var cart={}, cat="Все";
+var cats=["Все"].concat(items.map(function(i){return i.cat}).filter(function(c,i,a){return a.indexOf(c)===i}));
+function $(id){return document.getElementById(id)}
+function renderChips(){
+ $("chips").innerHTML=cats.map(function(c){return '<button class="chip" aria-pressed="'+(c===cat)+'" data-c="'+c+'">'+c+'</button>'}).join("");
+ [].forEach.call($("chips").children,function(b){b.onclick=function(){cat=b.dataset.c;renderChips();renderList()}});
+}
+function renderList(){
+ $("list").innerHTML=items.filter(function(i){return cat==="Все"||i.cat===cat}).map(function(i){
+  var n=cart[i.id]||0;
+  var q=n?'<button data-d="-1" data-i="'+i.id+'" aria-label="Убрать одну">−</button><b>'+n+'</b><button data-d="1" data-i="'+i.id+'" aria-label="Добавить ещё одну">+</button>'
+        :'<button class="add" data-d="1" data-i="'+i.id+'">Добавить</button>';
+  return '<article class="item"><div class="pic '+(i.t||"")+'" aria-hidden="true">'+i.ic+'</div><div><h3>'+i.name+'</h3><small>'+i.desc+'</small><div class="price">'+i.price+' '+CUR+'</div></div><div class="q">'+q+'</div></article>';
+ }).join("");
+ [].forEach.call($("list").querySelectorAll("button"),function(b){b.onclick=function(){
+  var id=b.dataset.i,v=(cart[id]||0)+ +b.dataset.d; if(v<=0)delete cart[id]; else cart[id]=v; renderList(); update();
+ }});
+}
+function total(){return items.reduce(function(s,i){return s+(cart[i.id]||0)*i.price},0)}
+function count(){return Object.keys(cart).reduce(function(s,k){return s+cart[k]},0)}
+function update(){
+ var c=count();
+ $("bar").classList.toggle("on",c>0);
+ $("order").classList.toggle("on",c>0);
+ $("sum").textContent=c+" поз. · "+total()+" "+CUR;
+}
+function message(){
+ var l=["Здравствуйте! Хочу заказать:"];
+ items.forEach(function(i){if(cart[i.id])l.push("• "+i.name+" × "+cart[i.id]+" = "+cart[i.id]*i.price+" "+CUR)});
+ l.push("Итого: "+total()+" "+CUR);
+ if($("name").value)l.push("Имя: "+$("name").value);
+ if($("addr").value)l.push("Адрес: "+$("addr").value);
+ if($("when").value)l.push("Когда: "+$("when").value);
+ if($("cmt").value)l.push("Комментарий: "+$("cmt").value);
+ return l.join("\n");
+}
+$("go").onclick=function(){
+ var m=message();
+ if(!WA){
+  try{navigator.clipboard.writeText(m)}catch(e){}
+  alert("В демо-версии номер WhatsApp ещё не подключён. Текст заказа:\n\n"+m);
+  return;
+ }
+ window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(m),"_blank");
+};
+renderChips();renderList();update();
+</script>
+</body>
+</html>
